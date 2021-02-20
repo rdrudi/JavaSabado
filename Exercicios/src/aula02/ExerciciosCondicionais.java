@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-public class Exercicios {
+public class ExerciciosCondicionais {
 	
 	public static void main(String[] args) {
 		//imprimir2emOrdem();
