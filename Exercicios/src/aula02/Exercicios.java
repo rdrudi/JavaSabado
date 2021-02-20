@@ -2,12 +2,79 @@ package aula02;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class Exercicios {
 	
 	public static void main(String[] args) {
 		//imprimir2emOrdem();
 		//sinalDoNumero();
-		imprimir3emOrdem();
+		//imprimir3emOrdem();
+		//divisores();
+		diaDaSemana();
+	}
+	
+	/*
+	 * Leia um inteiro entre 1 e 7 e 
+	 * informe o dia respectivo da semana.
+	 * Caso o número esteja fora do intervalo 
+	 * informar número inválido.
+	 * Entrada:  2
+	 * Saída: Segunda-Feira
+	 * Entrada: 8
+	 * Saída: Número inválido!
+	 */
+	public static void diaDaSemana() {
+		String str = JOptionPane.showInputDialog("Número do Dia da Semana:");
+		int num = Integer.parseInt(str);
+		String dia;
+		
+		switch (num){
+		case 1: dia = "Domingo"; break;
+		case 2: dia = "Segunda-Feira"; break;
+		case 3: dia = "Terça-Feira"; break;
+		case 4: dia = "Quarta-Feira"; break;
+		case 5: dia = "Quinta-Feira"; break;
+		case 6: dia = "Sexta-Feira"; break;
+		case 7: dia = "Sábado"; break;
+		default: dia = "Número inválido!";
+		}
+		
+		JOptionPane.showMessageDialog(null, dia);		
+	}
+	
+	/*
+	 * Leia 2 inteiros e informe se são divisores.
+	 * Divisor: um número é divisor de outro se o 
+	 *          resto da divisão é zero.
+	 * Entrada: 10 2
+	 * Saída: 2 é divisor de 10
+	 * Entrada: 3 9
+	 * Saída: 3 é divisor de 9
+	 * Entrada: 10 3
+	 * Saída: Não são divisores
+	 */
+	public static void divisores() {
+		// ler 2 inteiros a e b
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Digite 2 inteiros: ");
+		int a = sc.nextInt();
+		int b = sc.nextInt();
+		// pegar o resto da divisão de a por b
+		int resto = a % b;
+		// se for zero - b é divisor de a
+		if (resto == 0) {
+			JOptionPane.showMessageDialog(null, b + " é divisor de " + a);
+		} else {  // senão
+			// pegar o resto da divisão de b por a
+			// se for zero - a é divisor de b
+			if ((b % a) == 0) {
+				JOptionPane.showMessageDialog(null, a + " é divisor de " + b);
+			} else {  // senão
+				// não são divisores
+				JOptionPane.showMessageDialog(null, "Não são divisores");
+			}
+		}
 	}
 	
 	/*
