@@ -13,32 +13,38 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
+
+import util.Mat;
+
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Dimension;
 
 public class TelaCalculadora extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel pnTitulo;
 	private JPanel pnCentral;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
+	private JLabel lbNum1;
+	private JLabel lbTitulo;
+	private JLabel lbNum2;
+	private JLabel lbResultado;
 	private JTextField tfNum1;
 	private JTextField tfNum2;
 	private JTextField tfResultado;
 	private JPanel panel;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JButton btnNewButton_2;
-	private JButton btnNewButton_3;
-	private JButton btnNewButton_4;
-	private JButton btnNewButton_5;
-	private JButton btnNewButton_6;
+	private JButton btSoma;
+	private JButton btSub;
+	private JButton btMult;
+	private JButton btDiv;
+	private JButton btMMC;
+	private JButton btMDC;
+	private JButton btExp;
+	private JLabel lbLogo;
 
 	/**
 	 * Launch the application.
@@ -61,49 +67,60 @@ public class TelaCalculadora extends JFrame {
 	 */
 	public TelaCalculadora() {
 		initComponents();
+		setTitle("Calculadora Java");
 	}
+	
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 641, 325);
+		setBounds(100, 100, 721, 325);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		pnTitulo = new JPanel();
+		pnTitulo.setPreferredSize(new Dimension(10, 60));
 		pnTitulo.setBackground(new Color(0, 0, 153));
 		contentPane.add(pnTitulo, BorderLayout.NORTH);
 		
-		lblNewLabel_1 = new JLabel("Calculadora");
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("Trebuchet MS", Font.BOLD, 40));
+		lbTitulo = new JLabel("Calculadora");
+		lbTitulo.setForeground(Color.WHITE);
+		lbTitulo.setFont(new Font("Trebuchet MS", Font.BOLD, 40));
+		
+		lbLogo = new JLabel("");
+		lbLogo.setIcon(new ImageIcon(TelaCalculadora.class.getResource("/imagens/logoCalculadora.png")));
 		GroupLayout gl_pnTitulo = new GroupLayout(pnTitulo);
 		gl_pnTitulo.setHorizontalGroup(
-			gl_pnTitulo.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_pnTitulo.createSequentialGroup()
-					.addContainerGap(203, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_1)
-					.addGap(200))
+			gl_pnTitulo.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_pnTitulo.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lbLogo)
+					.addGap(185)
+					.addComponent(lbTitulo)
+					.addContainerGap(230, Short.MAX_VALUE))
 		);
 		gl_pnTitulo.setVerticalGroup(
 			gl_pnTitulo.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnTitulo.createSequentialGroup()
-					.addComponent(lblNewLabel_1)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap()
+					.addGroup(gl_pnTitulo.createParallelGroup(Alignment.LEADING)
+						.addComponent(lbLogo)
+						.addComponent(lbTitulo))
+					.addContainerGap(33, Short.MAX_VALUE))
 		);
 		pnTitulo.setLayout(gl_pnTitulo);
 		
 		pnCentral = new JPanel();
 		contentPane.add(pnCentral, BorderLayout.CENTER);
 		
-		lblNewLabel = new JLabel("Num 1:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbNum1 = new JLabel("Num 1:");
+		lbNum1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		lblNewLabel_2 = new JLabel("Num 2:");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbNum2 = new JLabel("Num 2:");
+		lbNum2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		lblNewLabel_3 = new JLabel("Resultado:");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbResultado = new JLabel("Resultado:");
+		lbResultado.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		tfNum1 = new JTextField();
 		tfNum1.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -125,17 +142,17 @@ public class TelaCalculadora extends JFrame {
 				.addGroup(gl_pnCentral.createSequentialGroup()
 					.addGap(44)
 					.addGroup(gl_pnCentral.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNewLabel_3)
-						.addComponent(lblNewLabel)
-						.addComponent(lblNewLabel_2))
+						.addComponent(lbResultado)
+						.addComponent(lbNum1)
+						.addComponent(lbNum2))
 					.addGap(18)
 					.addGroup(gl_pnCentral.createParallelGroup(Alignment.LEADING)
 						.addComponent(tfNum1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(tfNum2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(tfResultado, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(55)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(66, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 376, GroupLayout.PREFERRED_SIZE)
+					.addGap(26))
 		);
 		gl_pnCentral.setVerticalGroup(
 			gl_pnCentral.createParallelGroup(Alignment.LEADING)
@@ -145,85 +162,180 @@ public class TelaCalculadora extends JFrame {
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_pnCentral.createSequentialGroup()
 							.addGroup(gl_pnCentral.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel)
+								.addComponent(lbNum1)
 								.addComponent(tfNum1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(34)
 							.addGroup(gl_pnCentral.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel_2)
+								.addComponent(lbNum2)
 								.addComponent(tfNum2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(37)
 							.addGroup(gl_pnCentral.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel_3)
+								.addComponent(lbResultado)
 								.addComponent(tfResultado, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(85, Short.MAX_VALUE))
+					.addContainerGap(25, Short.MAX_VALUE))
 		);
 		
-		btnNewButton = new JButton("+");
-		btnNewButton.addActionListener(new ActionListener() {
+		btSoma = new JButton("");
+		btSoma.setIcon(new ImageIcon(TelaCalculadora.class.getResource("/imagens/btSoma.png")));
+		btSoma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				soma();
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btSoma.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
-		btnNewButton_1 = new JButton("-");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btSub = new JButton("");
+		btSub.setIcon(new ImageIcon(TelaCalculadora.class.getResource("/imagens/btSub.png")));
+		btSub.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sub();
+			}
+		});
+		btSub.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
-		btnNewButton_2 = new JButton("X");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btMult = new JButton("");
+		btMult.setIcon(new ImageIcon(TelaCalculadora.class.getResource("/imagens/btMult.png")));
+		btMult.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mult();
+			}
+		});
+		btMult.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
-		btnNewButton_3 = new JButton("/");
-		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btDiv = new JButton("");
+		btDiv.setIcon(new ImageIcon(TelaCalculadora.class.getResource("/imagens/btDiv.png")));
+		btDiv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				div();
+			}
+		});
+		btDiv.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
-		btnNewButton_4 = new JButton("MMC");
-		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btMMC = new JButton("MMC");
+		btMMC.setForeground(new Color(0, 0, 255));
+		btMMC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mmc();
+			}
+		});
+		btMMC.setFont(new Font("Tahoma", Font.BOLD, 32));
 		
-		btnNewButton_5 = new JButton("MDC");
-		btnNewButton_5.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btMDC = new JButton("MDC");
+		btMDC.setForeground(new Color(0, 0, 255));
+		btMDC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mdc();
+			}
+		});
+		btMDC.setFont(new Font("Tahoma", Font.BOLD, 32));
 		
-		btnNewButton_6 = new JButton("X^Y");
-		btnNewButton_6.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btExp = new JButton("X^Y");
+		btExp.setForeground(new Color(0, 0, 255));
+		btExp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				exp();
+			}
+		});
+		btExp.setFont(new Font("Tahoma", Font.BOLD, 32));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(14)
-							.addComponent(btnNewButton)
+							.addComponent(btSoma)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnNewButton_1)
+							.addComponent(btSub)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnNewButton_2)
-							.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-							.addComponent(btnNewButton_3))
+							.addComponent(btMult)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btDiv))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(btnNewButton_4)
-							.addPreferredGap(ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-							.addComponent(btnNewButton_5)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_6)))
-					.addContainerGap())
+							.addComponent(btMMC)
+							.addGap(18)
+							.addComponent(btMDC)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btExp)))
+					.addContainerGap(34, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(5)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton)
-						.addComponent(btnNewButton_1)
-						.addComponent(btnNewButton_2)
-						.addComponent(btnNewButton_3))
-					.addGap(31)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton_4)
-						.addComponent(btnNewButton_6)
-						.addComponent(btnNewButton_5))
-					.addContainerGap(62, Short.MAX_VALUE))
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btSoma)
+							.addComponent(btSub)
+							.addComponent(btMult))
+						.addComponent(btDiv))
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(31)
+							.addComponent(btMMC))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(29)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btExp)
+								.addComponent(btMDC))))
+					.addContainerGap(22, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		pnCentral.setLayout(gl_pnCentral);
+	}
+
+	private void exp() {
+		double a = Double.parseDouble(tfNum1.getText());
+		int b = Integer.parseInt(tfNum2.getText());
+		double valor = Mat.pot(a,b);
+		String resp = String.valueOf(valor);
+		tfResultado.setText(resp);		
+	}
+	
+	private void mdc() {
+		int a = Integer.parseInt(tfNum1.getText());
+		int b = Integer.parseInt(tfNum2.getText());
+		int valor = Mat.mdc(a,b);
+		String resp = String.valueOf(valor);
+		tfResultado.setText(resp);		
+	}
+	
+	private void mmc() {
+		int a = Integer.parseInt(tfNum1.getText());
+		int b = Integer.parseInt(tfNum2.getText());
+		int valor = Mat.mmc(a,b);
+		String resp = String.valueOf(valor);
+		tfResultado.setText(resp);		
+	}
+	
+	private void div() {
+		String resp;
+		double a = Double.parseDouble(tfNum1.getText());
+		double b = Double.parseDouble(tfNum2.getText());
+		if (b != 0) {
+			double valor = a / b;
+			resp = String.valueOf(valor);
+		} else {
+			resp = "Não divide por 0!";
+		}
+		tfResultado.setText(resp);		
+	}
+	
+	private void mult() {
+		double a = Double.parseDouble(tfNum1.getText());
+		double b = Double.parseDouble(tfNum2.getText());
+		double valor = a * b;
+		String resp = String.valueOf(valor);
+		tfResultado.setText(resp);		
+	}
+	
+	private void sub() {
+		double a = Double.parseDouble(tfNum1.getText());
+		double b = Double.parseDouble(tfNum2.getText());
+		double valor = a - b;
+		String resp = String.valueOf(valor);
+		tfResultado.setText(resp);		
 	}
 	
 	private void soma() {
