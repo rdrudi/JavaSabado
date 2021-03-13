@@ -13,6 +13,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -21,8 +22,14 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
+import util.Configuracao;
+
 import javax.swing.JSlider;
 import javax.swing.JProgressBar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class TelaLookFeel extends JFrame {
 
@@ -34,7 +41,7 @@ public class TelaLookFeel extends JFrame {
 	private JPanel panel2;
 	private JLabel lblNewLabel;
 	private JTextField txtTextfield;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	private JButton btnNewButton;
 	private JCheckBox chckbxNewCheckBox;
 	private JRadioButton rdbtnNewRadioButton;
@@ -49,6 +56,7 @@ public class TelaLookFeel extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					Configuracao.lookAndFeel("CDE/Motif");
 					TelaLookFeel frame = new TelaLookFeel();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -64,6 +72,8 @@ public class TelaLookFeel extends JFrame {
 	public TelaLookFeel() {
 		initComponents();
 	}
+	
+	
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 592, 389);
@@ -74,7 +84,7 @@ public class TelaLookFeel extends JFrame {
 		
 		pnTitulo = new JPanel();
 		pnTitulo.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		pnTitulo.setBackground(new Color(0, 206, 209));
+		pnTitulo.setBackground(SystemColor.activeCaption);
 		contentPane.add(pnTitulo, BorderLayout.NORTH);
 		
 		lbTitulo = new JLabel("Look & Feel");
@@ -99,7 +109,12 @@ public class TelaLookFeel extends JFrame {
 		txtTextfield.setColumns(10);
 		
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Op\u00E7\u00E3o 1", "Op\u00E7\u00E3o 2", "Op\u00E7\u00E3o 3", "Op\u00E7\u00E3o 4"}));
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setLookAndFeel();
+			}
+		});
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"CDE/Motif", "Metal", "Nimbus", "Windows", "Windows Classic"}));
 		comboBox.setBounds(32, 81, 236, 24);
 		panel1.add(comboBox);
 		
@@ -127,10 +142,19 @@ public class TelaLookFeel extends JFrame {
 		panel1.add(slider);
 		
 		progressBar = new JProgressBar();
+		progressBar.setValue(50);
 		progressBar.setBounds(310, 199, 200, 14);
 		panel1.add(progressBar);
 		
 		panel2 = new JPanel();
 		tabbedPane.addTab("Painel 2", null, panel2, null);
 	}
+	
+	private void setLookAndFeel() {
+		String laf = comboBox.getSelectedItem().toString();
+		Configuracao.lookAndFeel(laf);
+		SwingUtilities.updateComponentTreeUI(this);
+		this.repaint();
+	}
+	
 }

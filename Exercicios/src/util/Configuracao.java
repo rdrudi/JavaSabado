@@ -14,10 +14,10 @@ public class Configuracao {
 		        break;
 		      }
 		    }
-		  } catch (UnsupportedLookAndFeelException | ClassNotFoundException | 	  	    InstantiationException | IllegalAccessException e) {
+		  } catch (UnsupportedLookAndFeelException | ClassNotFoundException |
+				  InstantiationException | IllegalAccessException e) {
 		            System.out.println("Erro: " + e.getMessage());
-		            e.printStackTrace();
 		  }
-	}	
+	}
 
 }
