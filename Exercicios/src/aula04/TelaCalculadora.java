@@ -317,7 +317,7 @@ public class TelaCalculadora extends JFrame {
 			double valor = a / b;
 			resp = String.valueOf(valor);
 		} else {
-			resp = "Não divide por 0!";
+			resp = "Nï¿½o divide por 0!";
 		}
 		tfResultado.setText(resp);		
 	}
